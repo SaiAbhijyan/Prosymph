@@ -1,0 +1,227 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     DEPLOY PROSYMPH NOW - FOLLOW THESE EXACT STEPS          ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════
+ PART 1: DEPLOY API TO RENDER.COM (5 MINUTES)
+═══════════════════════════════════════════════════════════════
+
+1. Open your browser and go to:
+   → https://dashboard.render.com/register
+
+2. Click "Sign Up with GitHub"
+   → Authorize Render to access your repositories
+
+3. After login, click the "New +" button (top right)
+   → Select "Web Service"
+
+4. You'll see a list of your repos. Find:
+   → SaiAbhijyan/Prosymph
+   → Click "Connect"
+
+5. Render will auto-detect your render.yaml config!
+   Verify these settings:
+   
+   Name: prosymph-api
+   Branch: main
+   Root Directory: (blank)
+   Build Command: pnpm install && pnpm run build
+   Start Command: pnpm start
+   
+6. Environment Variables (Render should pre-fill from render.yaml):
+   - PORT: 10000
+   - NODE_ENV: production
+   - BEHAVIOR_LITE: true
+   - CORS_REGEX: \.vercel\.app$|\.netlify\.app$
+   - ORCH_API_KEY: (leave blank for now, or generate a random key)
+
+7. Click "Create Web Service"
+
+8. WAIT 2-3 minutes while Render builds and deploys
+
+9. When you see "Live" status, copy your API URL:
+   Example: https://prosymph-api.onrender.com
+
+10. TEST IT (PowerShell):
+    Invoke-WebRequest -UseBasicParsing https://YOUR-URL.onrender.com/healthz
+    
+    Should return: {"status":"ok"}
+
+✅ YOUR API IS LIVE!
+
+═══════════════════════════════════════════════════════════════
+ PART 2: UPDATE WEB APP WITH PRODUCTION API (2 MINUTES)
+═══════════════════════════════════════════════════════════════
+
+1. In your local project, open: apps/web-static/app.js
+
+2. Find line 13 (around line 13):
+   apiEl.value = localStorage.getItem("api") || urlParams.get("api") || "http://127.0.0.1:3000";
+
+3. Replace with your Render API URL:
+   apiEl.value = localStorage.getItem("api") || urlParams.get("api") || "https://prosymph-api.onrender.com";
+   
+   (Use YOUR actual Render URL from Step 1.9)
+
+4. Save the file
+
+5. Commit and push (PowerShell):
+   git add apps/web-static/app.js
+   git commit -m "config: Set production API URL for Render deployment"
+   git push origin main
+
+✅ WEB APP CONFIGURED!
+
+═══════════════════════════════════════════════════════════════
+ PART 3: DEPLOY WEB APP TO VERCEL (2 MINUTES)
+═══════════════════════════════════════════════════════════════
+
+1. Open your browser and go to:
+   → https://vercel.com/signup
+
+2. Click "Continue with GitHub"
+   → Authorize Vercel to access your repositories
+
+3. After login, click "Add New..." → "Project"
+
+4. You'll see "Import Git Repository"
+   → Find: SaiAbhijyan/Prosymph
+   → Click "Import"
+
+5. Configure the project:
+   Framework Preset: Other
+   Root Directory: apps/web-static
+   Build Command: (leave empty)
+   Output Directory: (leave empty)
+   Install Command: (leave empty)
+
+6. Click "Deploy"
+
+7. WAIT ~30 seconds for deployment
+
+8. When you see "Congratulations!", copy your web app URL:
+   Example: https://prosymph-web.vercel.app
+   (Vercel will show it prominently)
+
+9. TEST IT:
+   Open the URL in your browser
+   You should see the Prosymph web UI
+
+✅ YOUR WEB APP IS LIVE!
+
+═══════════════════════════════════════════════════════════════
+ PART 4: CONNECT WEB APP TO API (1 MINUTE)
+═══════════════════════════════════════════════════════════════
+
+1. Go back to Render dashboard:
+   → https://dashboard.render.com
+   → Click on "prosymph-api"
+   → Click "Environment" tab
+
+2. Find or add CORS_ORIGINS variable:
+   Click "Add Environment Variable"
+   
+   Key: CORS_ORIGINS
+   Value: https://prosymph-web.vercel.app
+   
+   (Use YOUR actual Vercel URL from Part 3.8)
+
+3. Click "Save Changes"
+   → Render will automatically redeploy (30 seconds)
+
+✅ API AND WEB APP CONNECTED!
+
+═══════════════════════════════════════════════════════════════
+ PART 5: FINAL TEST (1 MINUTE)
+═══════════════════════════════════════════════════════════════
+
+1. Open your Vercel web app URL in browser
+
+2. The API URL field should show your Render URL
+
+3. Test all task types:
+
+   DS&A Test:
+   → Prompt: "amazon sde2 coding round optimize time complexity"
+   → Target: cursor
+   → Click Rewrite
+   → Should see: "Senior SWE mentor + competitive programming coach"
+
+   Web Test:
+   → Prompt: "create React component with API endpoint"
+   → Target: cursor
+   → Click Rewrite
+   → Should see: "Senior Full-Stack Engineer + Tech Lead"
+
+   Data Science Test:
+   → Prompt: "pandas data loader with sklearn metrics"
+   → Target: cursor
+   → Click Rewrite
+   → Should see: "Senior Data Scientist + MLE"
+
+   DevOps Test:
+   → Prompt: "terraform and kubernetes with CI"
+   → Target: cursor
+   → Click Rewrite
+   → Should see: "DevOps/SRE Engineer"
+
+4. Try the Copy button - should copy formatted output
+
+5. Try different tools (chatgpt, claude-code, etc.)
+
+═══════════════════════════════════════════════════════════════
+ 🎊 YOU'RE LIVE! PROSYMPH IS DEPLOYED!
+═══════════════════════════════════════════════════════════════
+
+Your URLs:
+  🌐 Web App:  https://prosymph-web.vercel.app
+  🔌 API:      https://prosymph-api.onrender.com
+  📦 GitHub:   https://github.com/SaiAbhijyan/Prosymph
+
+What works:
+  ✅ 6 AI tools (Cursor, ChatGPT, Claude, Copilot, Kiro, Lovable)
+  ✅ 4 task types (DS&A, Web, Data Science, DevOps)
+  ✅ Task intelligence (Behavior Lite)
+  ✅ Auto-deploy on git push
+  ✅ CORS configured
+  ✅ Plain-text & JSON output
+  ✅ Copy to clipboard
+  ✅ API key support (optional)
+
+Share your app:
+  "I built ProSymph - an AI prompt orchestrator that transforms
+   any idea into expert prompts for Cursor, ChatGPT, Claude & more!
+   
+   Try it: https://prosymph-web.vercel.app
+   GitHub: https://github.com/SaiAbhijyan/Prosymph"
+
+═══════════════════════════════════════════════════════════════
+ TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+API not responding:
+  → Check Render logs: Dashboard → prosymph-api → Logs tab
+  → Verify build succeeded (should see "Build successful")
+  → Check environment variables are set
+
+Web app shows error:
+  → Check browser console (F12)
+  → Verify API URL in app.js is correct
+  → Check CORS_ORIGINS on Render includes your Vercel URL
+
+"Unable to reach API" error:
+  → Check your Render API is "Live" status
+  → Test: curl https://YOUR-API.onrender.com/healthz
+  → Verify CORS settings
+
+═══════════════════════════════════════════════════════════════
+
+Total Time: ~10 minutes
+Cost: $0 (Free tiers)
+Auto-deploy: Yes (on git push)
+Production Ready: Yes
+
+CONGRATULATIONS! 🎉
+

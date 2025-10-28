@@ -11,6 +11,9 @@ importers:
       '@fastify/cors':
         specifier: ^9.0.1
         version: 9.0.1
+      '@types/node':
+        specifier: ^20.11.0
+        version: 20.19.23
       dotenv-flow:
         specifier: ^4.1.0
         version: 4.1.0
@@ -24,9 +27,6 @@ importers:
       '@playwright/test':
         specifier: ^1.48.2
         version: 1.56.1
-      '@types/node':
-        specifier: ^20.11.0
-        version: 20.19.23
       concurrently:
         specifier: ^9.0.1
         version: 9.2.1
