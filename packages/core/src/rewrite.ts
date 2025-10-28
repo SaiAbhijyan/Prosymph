@@ -1,5 +1,5 @@
 import type { RewriteInput, RewriteOutput, VSAlternative } from "./types.js";
-import { harvestRepoSummary } from "@prompt-orchestrator/context";
+import { harvestRepoSummary } from "../../context/src/harvest.js";
 
 export async function rewrite(input: RewriteInput): Promise<RewriteOutput> {
   const repoSummary = await harvestRepoSummary();

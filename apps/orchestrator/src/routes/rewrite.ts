@@ -1,6 +1,6 @@
 import { FastifyPluginCallback } from "fastify";
 import { z } from "zod";
-import { rewrite, type RewriteInput, renderPlain, shapeForCursor } from "@prompt-orchestrator/core";
+import { rewrite, type RewriteInput, renderPlain, shapeForCursor } from "../../../packages/core/src/rewrite.js";
 
 const bodySchema = z.object({
   raw_prompt: z.string(),
