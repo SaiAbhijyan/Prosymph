@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: prosymph-api
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: BEHAVIOR_LITE
+        value: true
+      - key: CORS_ORIGINS
+        sync: false
+      - key: CORS_REGEX
+        value: \\.vercel\\.app$|\\.netlify\\.app$
+      - key: ORCH_API_KEY
+        generateValue: true
+    healthCheckPath: /healthz
+
