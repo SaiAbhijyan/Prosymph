@@ -28,7 +28,8 @@ goBtn.addEventListener("click", async () => {
   if (!raw) { setStatus("Type a prompt to begin."); return; }
   setStatus("Contacting API…");
   try {
-    const endpoint = fmt === "json" ? `${api}/rewrite` : `${api}/rewrite?format=text`;
+    const apiBase = api.replace(/\/$/, ''); // Remove trailing slash
+  const endpoint = fmt === "json" ? `${apiBase}/rewrite` : `${apiBase}/rewrite?format=text`;
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", ...(key ? { "X-API-Key": key } : {}) },
