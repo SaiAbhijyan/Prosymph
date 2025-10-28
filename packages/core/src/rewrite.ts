@@ -74,9 +74,5 @@ export async function rewrite(input: RewriteInput): Promise<RewriteOutput> {
     "Stop and summarize if checks fail once."
   ];
 
-      return { ...base, vs: vsBlock, self_edits: selfEdits };
-    }
-
-    // Re-export functions needed by other modules
-    export { renderPlain } from "./render.js";
-    export { shapeForCursor } from "./behaviorLite/shapeCursor.js";
+  return { ...base, vs: vsBlock, self_edits: selfEdits };
+}
