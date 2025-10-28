@@ -1,5 +1,7 @@
 import type { RewriteInput, RewriteOutput, VSAlternative } from "./types.js";
 import { harvestRepoSummary } from "../../context/src/harvest.js";
+import { renderPlain } from "./render.js";
+import { shapeForCursor } from "./behaviorLite/shapeCursor.js";
 
 export async function rewrite(input: RewriteInput): Promise<RewriteOutput> {
   const repoSummary = await harvestRepoSummary();
@@ -67,5 +69,9 @@ export async function rewrite(input: RewriteInput): Promise<RewriteOutput> {
     "Stop and summarize if checks fail once."
   ];
 
-  return { ...base, vs: vsBlock, self_edits: selfEdits };
-}
+      return { ...base, vs: vsBlock, self_edits: selfEdits };
+    }
+
+    // Re-export functions needed by other modules
+    export { renderPlain } from "./render.js";
+    export { shapeForCursor } from "./behaviorLite/shapeCursor.js";
