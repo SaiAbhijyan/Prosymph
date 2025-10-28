@@ -16,5 +16,5 @@
     }
   },
   "include": ["apps", "packages", "skills", ".cursor"],
-  "exclude": ["**/tests/**", "**/*.spec.ts", "**/chrome-ext/**", "**/apps/web-static/**", "node_modules", "dist"]
+  "exclude": ["**/tests/**", "**/*.spec.ts", "**/*.test.ts", "**/chrome-ext/**", "**/apps/web-static/**", "**/apps/vscode-ext/**", "node_modules", "dist"]
 }
