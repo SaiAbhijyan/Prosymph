@@ -8,9 +8,9 @@ const copyBtn = document.getElementById("copy");
 const goBtn = document.getElementById("go");
 const statusEl = document.getElementById("status");
 
-// bootstrap defaults: localStorage → query ?api= → fallback
+// bootstrap defaults: query ?api= → localStorage → fallback
 const urlParams = new URLSearchParams(location.search);
-apiEl.value = localStorage.getItem("api") || urlParams.get("api") || "https://prosymph.onrender.com";
+apiEl.value = urlParams.get("api") || localStorage.getItem("api") || "https://prosymph.onrender.com";
 keyEl.value = localStorage.getItem("key") || "";
 
 function setStatus(msg){ statusEl.textContent = msg || ""; }
