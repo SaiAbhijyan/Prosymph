@@ -2,8 +2,9 @@ import Fastify from "fastify";
 import fastifyCors from "@fastify/cors";
 import { readFile } from "fs/promises";
 import { rewriteHandler } from "./routes/rewrite.js";
+import { fastifyLogger } from "./logger.js";
 
-const app = Fastify({ logger: { transport: { target: "pino-pretty" } } as any });
+const app = Fastify({ logger: fastifyLogger });
 // CORS allowlist from env (comma-separated). Fallback covers localhost + 127.0.0.1.
 const corsOrigins = (process.env.CORS_ORIGINS ?? "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000").split(",").map(s=>s.trim()).filter(Boolean);
 // Optional regex matcher for deployments (e.g., *.vercel.app, *.netlify.app)
