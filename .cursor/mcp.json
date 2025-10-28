@@ -1,0 +1,7 @@
+{
+  "orchestrator": {
+    "command": "pnpm",
+    "args": ["mcp"],
+    "env": {}
+  }
+}

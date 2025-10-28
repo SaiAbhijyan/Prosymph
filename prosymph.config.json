@@ -1,0 +1,24 @@
+{
+  "language": "ts",
+  "test": "vitest",
+  "paths": {
+    "code": "src/solution.ts",
+    "test": "tests/solution.test.ts",
+    "web": {
+      "app": "apps/web-static",
+      "api": "apps/orchestrator/src/routes",
+      "test": "tests"
+    },
+    "data": {
+      "notebooks": "notebooks",
+      "scripts": "packages",
+      "test": "tests"
+    },
+    "devops": {
+      "terraform": "infra/terraform",
+      "k8s": "infra/k8s",
+      "ci": ".github/workflows"
+    }
+  }
+}
+

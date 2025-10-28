@@ -1,0 +1,30 @@
+{
+  "name": "prompt-orchestrator-vscode",
+  "displayName": "Prompt Orchestrator",
+  "publisher": "yourPublisherId",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.85.0" },
+  "description": "Turn any idea into a senior-level, tool-specific prompt (Cursor/ChatGPT/Claude/Copilot). Context-aware with Verbalized Sampling & Self-Adapt.",
+  "categories": ["Other", "Programming Languages"],
+  "keywords": ["prompt", "cursor", "chatgpt", "claude", "copilot", "ai", "llm"],
+  "repository": { "type": "git", "url": "https://github.com/yourname/prosymph" },
+  "license": "MIT",
+  "icon": "images/icon-128.png",
+  "activationEvents": ["onCommand:orchestrator.rewrite"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "orchestrator.rewrite", "title": "Prompt Orchestrator: Rewrite Prompt" }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {}
+}

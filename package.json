@@ -1,0 +1,36 @@
+{
+  "name": "prompt-orchestrator-mono",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "tsx watch apps/orchestrator/src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/apps/orchestrator/src/index.js",
+    "typecheck": "tsc -noEmit",
+    "test": "vitest",
+    "mcp": "tsx apps/mcp-server/src/index.ts",
+    "web:dev": "serve apps/web-static -l 5173",
+    "dev:all": "concurrently -n API,WEB -c green,cyan \"pnpm dev\" \"pnpm web:dev\"",
+    "smoke:api": "node scripts/smoke-all.mjs",
+    "e2e:web": "playwright test",
+    "e2e:web:headed": "playwright test --headed",
+    "prep:browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@playwright/test": "^1.48.2",
+    "concurrently": "^9.0.1",
+    "pino-pretty": "^13.1.2",
+    "serve": "^14.2.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.5.4",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "dotenv-flow": "^4.1.0",
+    "fastify": "^4.26.2",
+    "zod": "^3.23.8"
+  }
+}

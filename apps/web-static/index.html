@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Prosymph — Prompt Orchestrator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="./assets/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg:#0B0B0B;            /* from your logo background */
+        --ink:#F4F6EF;           /* warm off-white text */
+        --muted:#A5A9A2;         /* secondary text */
+        --accent:#A8F36E;        /* lime corner from logo */
+        --accent-2:#0E3C32;      /* deep teal from logo mark */
+        --card:#111214;
+        --card-2:#0F1214;
+        --ring: #2B2F2B;
+        --shadow: 0 10px 30px rgba(0,0,0,.4);
+        --radius: 16px;
+      }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0; background: radial-gradient(1200px 600px at 20% -10%, rgba(168,243,110,0.06), transparent 60%),
+                          radial-gradient(1000px 500px at 120% 20%, rgba(14,60,50,0.25), transparent 60%),
+                          var(--bg);
+        color:var(--ink); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        display:flex; align-items:flex-start; justify-content:center; padding:32px;
+      }
+      .container{width:min(1040px,100%); display:flex; flex-direction:column; gap:18px}
+      .brand{
+        display:flex; align-items:center; gap:14px; padding:18px 20px; border-radius:calc(var(--radius) + 4px);
+        background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+        box-shadow:var(--shadow); border:1px solid var(--ring);
+      }
+      .brand img{height:42px; width:auto; border-radius:10px}
+      .brand h1{font-size:28px; font-weight:800; letter-spacing:.2px; margin:0}
+      .brand small{display:block; color:var(--muted); font-weight:500; margin-top:2px}
+      .grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:18px}
+      @media (max-width: 900px){ .grid{grid-template-columns:1fr}}
+      .panel{
+        background:linear-gradient(180deg, var(--card), var(--card-2));
+        border:1px solid var(--ring); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+      }
+      label{font-size:13px; color:var(--muted); display:block; margin-bottom:6px}
+      input,select,textarea{
+        width:100%; background:#0B0D0F; color:var(--ink); border:1px solid #222629; border-radius:12px;
+        padding:12px 12px; outline:none; transition:.15s border-color ease;
+      }
+      input:focus,select:focus,textarea:focus{border-color:#2E7E3E}
+      .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+      .actions{display:flex; gap:10px; align-items:center; margin-top:10px}
+      button{
+        background:linear-gradient(180deg, var(--accent), #7EE05E);
+        color:#0B0B0B; border:none; padding:12px 16px; border-radius:12px; font-weight:700; cursor:pointer;
+        box-shadow: 0 6px 18px rgba(168,243,110,.25);
+      }
+      button.secondary{
+        background:#151819; color:var(--ink); border:1px solid #2B2F2B; box-shadow:none;
+      }
+      .status{font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+              font-size:12px; color:var(--muted)}
+      .pre{
+        font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space:pre-wrap; background:#080909; color:#EDEFE8; padding:14px; border-radius:12px;
+        max-height:540px; overflow:auto; border:1px solid #202426;
+      }
+      .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px;
+            border:1px solid #2B2F2B; background:#0E1112}
+      .dot{height:8px; width:8px; border-radius:50%; background:var(--accent)}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="brand">
+        <img src="./assets/logo.png" alt="Prosymph logo"/>
+        <div>
+          <h1>Prosymph</h1>
+          <small>the go to prompt orchestrator</small>
+        </div>
+        <div style="flex:1"></div>
+        <span class="chip"><span class="dot"></span>VS/SEAL/Context-aware</span>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="row">
+            <div>
+              <label>API Base URL</label>
+              <input id="api" placeholder="http://localhost:3000" />
+            </div>
+            <div>
+              <label>API Key (optional)</label>
+              <input id="key" placeholder="X-API-Key" />
+            </div>
+          </div>
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label>Target Tool</label>
+              <select id="target">
+                <option>cursor</option><option>chatgpt</option><option>claude-code</option>
+                <option>copilot</option><option>kiro</option><option>lovable</option>
+              </select>
+            </div>
+            <div>
+              <label>Mode</label>
+              <select id="mode">
+                <option value="text" selected>Plain text (copy-ready)</option>
+                <option value="json">JSON</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:12px;">
+            <label>Your Prompt</label>
+            <textarea id="prompt" rows="8" placeholder="What do you want to build?"></textarea>
+          </div>
+          <div class="actions">
+            <button id="go">Rewrite</button>
+            <button id="copy" class="secondary" style="display:none;">Copy</button>
+            <span id="status" class="status"></span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <label>Result</label>
+          <pre id="out" class="pre"></pre>
+        </div>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+  </html>

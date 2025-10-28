@@ -1,0 +1,8 @@
+[
+  "help me create a web application that can save songs and play them, use python + react + fastapi + postgres",
+  "build a web app using python reactjs and fastapi plus postgres for a job application tracking system; mask stored passwords",
+  "create a dashboard for analytics with Next.js, Tailwind, and Supabase",
+  "add a dark mode toggle to settings page",
+  "convert monolith to microservices; add CI with GitHub Actions; dockerize services"
+]
+

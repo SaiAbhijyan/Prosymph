@@ -1,0 +1,5 @@
+[
+  "Always create or update tests when behavior changes",
+  "Prefer explicit file paths in prompts and diffs",
+  "Stop and summarize if acceptance checks fail once"
+]

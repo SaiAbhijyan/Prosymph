@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Prompt Orchestrator",
+  "version": "0.0.1",
+  "description": "Craft senior-level, tool-specific prompts for Cursor/ChatGPT/Claude/Copilot from any page.",
+  "action": { "default_popup": "popup.html", "default_title": "Prompt Orchestrator" },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["http://localhost:3000/*", "https://api.yourdomain.com/*"]
+}
+
