@@ -3,6 +3,11 @@ import { harvestRepoSummary } from "../../context/src/harvest.js";
 import { renderPlain } from "./render.js";
 import { shapeForCursor } from "./behaviorLite/shapeCursor.js";
 
+// Re-export types and functions needed by other modules
+export type { RewriteInput, RewriteOutput, VSAlternative } from "./types.js";
+export { renderPlain } from "./render.js";
+export { shapeForCursor } from "./behaviorLite/shapeCursor.js";
+
 export async function rewrite(input: RewriteInput): Promise<RewriteOutput> {
   const repoSummary = await harvestRepoSummary();
 
