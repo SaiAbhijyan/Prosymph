@@ -10,7 +10,7 @@ const statusEl = document.getElementById("status");
 
 // bootstrap defaults: localStorage → query ?api= → fallback
 const urlParams = new URLSearchParams(location.search);
-apiEl.value = localStorage.getItem("api") || urlParams.get("api") || "http://127.0.0.1:3000";
+apiEl.value = localStorage.getItem("api") || urlParams.get("api") || "https://prosymph.onrender.com";
 keyEl.value = localStorage.getItem("key") || "";
 
 function setStatus(msg){ statusEl.textContent = msg || ""; }
